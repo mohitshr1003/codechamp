@@ -16,5 +16,30 @@
       </div>
     </div>
   </section><!-- End Hero Section -->
+
+  <div class="container">
+    <table class="table border">
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Roll Number</th>
+        <th>Email Address</th>
+        <th>Contact Number</th>
+        <th>Password</th>
+      </tr>
+      
+      {% for qs in query_set %}
+      <tr>
+        <td>{{ qs.fname }}</td>
+        <td>{{ qs.lname }}</td>
+        <td>{{ qs.rollno }}</td>
+        <td>{{ qs.email_id }}</td>
+        <td>{{ qs.phone }}</td>
+        <td>{{ qs.password }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+
   
 {% endblock %}

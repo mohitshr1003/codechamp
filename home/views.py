@@ -7,7 +7,9 @@ from django.contrib.auth import *
 
 # Create your views here.
 def index(request):
-    return render(request, 'index.html')
+    qs = UserAccountDetails.objects.all()
+    data = {'query_set' : qs}
+    return render(request, 'index.html', context=data)
 
 def about_page(request):
     return render(request, 'about.html')
@@ -22,13 +24,30 @@ def internship_page(request):
     return render(request, 'internship.html')
 
 def login_page(request):
+
     data = {}
 
-    # if(request.method == 'POST'):
+    if(request.method == 'POST'):
+        qs = UserAccountDetails.objects.filter(
+            rollno = request.POST.get('roll_number'),
+            fname = request.POST.get('fname')
+            )
+        
+        info = {'query_set': qs}
 
-    return render(request, 'login.html')
+        if qs:
+            return render(request, 'index.html', context=info)
+        
+        else:
+            data['result'] = 'Invalid Details'
+            return render(request, 'login.html', context=data)
+
+    else:
+        return render(request, 'login.html')
 
 def signup_page(request):
+
+    details = {}
 
     if(request.method == 'POST'):
         first_name = request.POST.get('fname')
@@ -46,8 +65,11 @@ def signup_page(request):
             phone = user_phone_no,
             password = user_password
         )
-
         account_registration.save()
+
+        details['result'] = 'Your account is created'
+        return render(request, 'signup.html', context=details)
+
     return render(request, 'signup.html')
 
 def contact_page(request):
