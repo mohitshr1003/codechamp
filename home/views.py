@@ -7,9 +7,9 @@ from django.contrib.auth import *
 
 # Create your views here.
 def index(request):
-    qs = UserAccountDetails.objects.all()
-    data = {'query_set' : qs}
-    return render(request, 'index.html', context=data)
+    # qs = UserAccountDetails.objects.all()
+    # data = {'query_set' : qs}
+    return render(request, 'index.html')
 
 def about_page(request):
     return render(request, 'about.html')

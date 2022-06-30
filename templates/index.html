@@ -18,7 +18,8 @@
   </section><!-- End Hero Section -->
 
   <div class="container">
-    <table class="table border">
+    {% if query_set %}
+    <table class="table table-bordered table-responsive">
       <tr>
         <th>First Name</th>
         <th>Last Name</th>
@@ -39,6 +40,7 @@
       </tr>
       {% endfor %}
     </table>
+    {% endif %}
   </div>
 
   
